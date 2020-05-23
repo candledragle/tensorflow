@@ -1,0 +1,17 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ sym-test ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: build android
+      run: cd lite/examples/image_segmentation/android && ./gradlew :app:build
+    - name: check
+      run: cd lite/examples/image_segmentation/android/app && file build/outputs/apk/debug/*.apk
